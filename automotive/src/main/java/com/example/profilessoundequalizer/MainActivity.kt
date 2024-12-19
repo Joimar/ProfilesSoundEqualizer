@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 //        for (i in numberOfBands - 3 until numberOfBands) {
 //            equalizer.setBandLevel(i.toShort(), minLevel.toShort())
 //        }
-        Log.e("TESTE", freqRange[0].toString())
-        Log.e("TESTE", freqRange[1].toString())
+        Log.e("Frequência Mínima", freqRange[0].toString())
+        Log.e("Frequência Máxima", freqRange[1].toString())
 
         button1.setOnClickListener {
             for(i in 0 until numberOfBands){
