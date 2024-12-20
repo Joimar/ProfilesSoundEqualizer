@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         var numberOfBands:Short = equalizer.numberOfBands
         var freqRange = equalizer.bandLevelRange
-        Log.e("TESTE", "Number of Bands $numberOfBands");
+        Log.e("TESTE Debug", "Number of Bands $numberOfBands");
         //equalizer.setBa
 
 //        for (i in numberOfBands - 3 until numberOfBands) {
