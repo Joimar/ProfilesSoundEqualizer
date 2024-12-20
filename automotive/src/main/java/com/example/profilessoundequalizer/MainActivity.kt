@@ -10,6 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.ui.AppBarConfiguration
 
 
@@ -19,13 +21,21 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         //val appBarConfiguration = AppBarConfiguration(navController.graph)
-        var button1:Button = findViewById(R.id.button1)
-        var button2:Button = findViewById(R.id.button2)
+//        var button1:Button = findViewById(R.id.button1)
+//        var button2:Button = findViewById(R.id.button2)
 
         var equalizer: Equalizer = Equalizer(0,0)
 
         var numberOfBands:Short = equalizer.numberOfBands
         var freqRange = equalizer.bandLevelRange
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragment = MainFragment()
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.mainFragment, fragment) // Replace with the ID of your FrameLayout
+        fragmentTransaction.commit()
+
+
+
         Log.e("TESTE Debug", "Number of Bands $numberOfBands");
         //equalizer.setBa
 
@@ -35,19 +45,19 @@ class MainActivity : AppCompatActivity() {
         Log.e("Intensidade do som Mínima", freqRange[0].toString())
         Log.e("Intensidade do som Máxima", freqRange[1].toString())
 
-        button1.setOnClickListener {
-            for(i in 0 until numberOfBands){
-                equalizer.setBandLevel(i.toShort(), freqRange[0])
-                equalizer.setEnabled(true)
-            }
-        }
-
-        button2.setOnClickListener {
-            for(i in 0 until numberOfBands){
-                equalizer.setBandLevel(i.toShort(), (freqRange[1]/2).toShort())
-                equalizer.setEnabled(true)
-            }
-        }
+//        button1.setOnClickListener {
+//            for(i in 0 until numberOfBands){
+//                equalizer.setBandLevel(i.toShort(), freqRange[0])
+//                equalizer.setEnabled(true)
+//            }
+//        }
+//
+//        button2.setOnClickListener {
+//            for(i in 0 until numberOfBands){
+//                equalizer.setBandLevel(i.toShort(), (freqRange[1]/2).toShort())
+//                equalizer.setEnabled(true)
+//            }
+//        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
