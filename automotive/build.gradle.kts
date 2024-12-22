@@ -53,4 +53,8 @@ dependencies {
     api("androidx.navigation:navigation-ui-ktx:$nav_version")
     api("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
 
+    val room_version = "2.6.1"
+
+    implementation(libs.androidx.room.runtime)
+
 }
