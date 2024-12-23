@@ -12,7 +12,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.room.Room
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +26,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "my-room-db"
+        ).build()
+
+        // Example: Insert a new user
+        CoroutineScope(Dispatchers.IO).launch {
+            val newUser = User(firstName = "John Doe", lastName = "john.doe@example.com")
+            val newUserId = db.userDao().insertAll(newUser)
+            Log.d("Database", "New User ID: $newUserId")
+        }
+
         //val appBarConfiguration = AppBarConfiguration(navController.graph)
 //        var button1:Button = findViewById(R.id.button1)
 //        var button2:Button = findViewById(R.id.button2)
