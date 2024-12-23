@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val newUser = User(firstName = "John Doe", lastName = "john.doe@example.com")
             val newUserId = db.userDao().insertAll(newUser)
+            Log.d("Database",
+                db.userDao().findByName("John Doe", "john.doe@example.com").firstName.toString()
+            )
             Log.d("Database", "New User ID: $newUserId")
         }
 
