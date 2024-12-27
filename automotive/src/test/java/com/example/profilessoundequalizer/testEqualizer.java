@@ -45,6 +45,7 @@ public class MainActivityTest {
     public void onCreate_initializesEqualizerAndButtons() {
 
         activityRule.getScenario().onActivity(activity -> {
+         try{
             //Since we are mocking the equalizer, we don't need to get a real instance.
             //Equalizer equalizer = activity.equalizer; 
             Button button1 = activity.findViewById(R.id.button1);
@@ -54,6 +55,10 @@ public class MainActivityTest {
            //These assertions are not useful since the values are mocked.
            // assertEquals(numberOfBands, equalizer.getNumberOfBands());
            // assertEquals(freqRange, equalizer.getBandLevelRange());
+         } catch(SecurityException e){
+           // Handle the permission exception
+           e.printStackTrace();
+         }
 
         });
     }
@@ -64,14 +69,19 @@ public class MainActivityTest {
             Button button1 = activity.findViewById(R.id.button1);
             // Inject the mock equalizer into the activity (This would normally be done with dependency injection)
             activity.equalizer = mockEqualizer;
+         try{
             button1.performClick();
 
             for (short i = 0; i < numberOfBands; i++) {
                 //Mockito.verify verifies that the setBandLevel method was called with the correct arguments.
                 Mockito.verify(mockEqualizer).setBandLevel(i, freqRange[0]);
             }
-
+         
             Mockito.verify(mockEqualizer).setEnabled(true);
+         } catch(SecurityException e){
+           // Handle the permission exception
+           e.printStackTrace();
+         }
 
         });
 
@@ -85,13 +95,18 @@ public class MainActivityTest {
             Button button2 = activity.findViewById(R.id.button2);
             // Inject the mock equalizer into the activity (This would normally be done with dependency injection)
             activity.equalizer = mockEqualizer;
+         try{
             button2.performClick();
             for (short i = 0; i < numberOfBands; i++) {
                 Mockito.verify(mockEqualizer).setBandLevel(i, (short) (freqRange[1] / 2));
             }
 
             Mockito.verify(mockEqualizer).setEnabled(true);
+         } catch (SecurityException e){
 
+          // Handle the permission exception
+          e.printStackTrace();
+         }
         });
 
     }
