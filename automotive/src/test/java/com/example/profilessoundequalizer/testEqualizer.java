@@ -23,8 +23,8 @@ import static org.mockito.Mockito.when;
 @RunWith(AndroidJUnit4.class)
 
 public class MainActivityTest {
+    
     @Rule
-
     public ActivityScenarioRule<MainActivity> activityRule = new ActivityScenarioRule<>(MainActivity.class);
     private Equalizer mockEqualizer;
     private short numberOfBands;
